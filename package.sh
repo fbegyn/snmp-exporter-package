@@ -2,14 +2,8 @@
 
 ./fetch.sh $1 $2
 
-sed -i "s/vx.y.z/v$1/g" ./nfpm.yaml
+sed "s/vx.y.z/v$1/g" ./nfpm.yaml > ./nfpm-temp.yaml
 
-nfpm pkg --target snmp_exporter-$1.$2.deb
+nfpm pkg --config="nfpm-temp.yaml" --target="snmp-exporter_$1_$2.deb"
 
-rm -rf ./bin
-
-rm -rf ./snmp_exporter-$1.$2.tar.gz
-rm -rf ./snmp_exporter-$1.$2
-rm -rf ./snmp.yml
-
-git checkout -- nfpm.yaml
+rm -rf ./bin ./snmp.yml ./snmp_exporter-$1.linux-$2 ./snmp_exporter-$1.linux-$2.tar.gz ./nfpm-temp.yaml
