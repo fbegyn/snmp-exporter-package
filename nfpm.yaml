@@ -1,5 +1,5 @@
 # nfpm example config file
-name: "snmp_exporter"
+name: "snmp-exporter"
 arch: "amd64"
 platform: "linux"
 version: "vx.y.z"
