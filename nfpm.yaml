@@ -3,27 +3,23 @@ name: "snmp-exporter"
 arch: "amd64"
 platform: "linux"
 version: "vx.y.z"
+release: 1
 section: "default"
 priority: "extra"
 maintainer: "Francis Begyn <francis@begyn.be>"
 description: |
   SNMP Exporter for Prometheus
-vendor: "Francis"
+vendor: "Prometheus"
 homepage: "https://github.com/prometheus/snmp_exporter"
-license: "MIT"
-bindir: "/usr/sbin"
-files:
-  ./snmp_exporter.service: "/etc/systemd/system/snmp_exporter.service"
-  ./bin/snmp_exporter: "/usr/sbin/snmp_exporter"
-config_files:
-  ./snmp.yml: "/etc/snmp_exporter/snmp.yml"
-overrides:
-  rpm:
-    scripts:
-      preinstall: ./scripts/preinstall.sh
-      postremove: ./scripts/postremove.sh
-  deb:
-    scripts:
-      postinstall: ./scripts/postinstall.sh
-      preremove: ./scripts/preremove.sh
-      postremove: ./scripts/postremove.sh
+license: "Apache license 2"
+contents:
+  - src: ./snmp_exporter.service
+    dst: /etc/systemd/system/snmp_exporter.service
+  - src: ./snmp_exporter
+    dst: /usr/sbin/snmp_exporter
+  - src: ./snmp.yml
+    dst: /etc/snmp_exporter/snmp.yml
+scripts:
+  postinstall: ./scripts/postinstall.sh
+  preremove: ./scripts/preremove.sh
+  postremove: ./scripts/postremove.sh
